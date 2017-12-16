@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='./node_modules\jquery\dist\jquery.min.js'></script>
+    <script type="text/javascript" src=".\node_modules\jquery-validation\dist\jquery.validate.min.js"></script> 
+    <script type='text/javascript' src='.\node_modules\jquery-validation\dist\additional-methods.js'></script>
+    <script src='.\node_modules\bootstrap\dist\js\bootstrap.min.js'></script>
+    <link rel='stylesheet' href='.\node_modules\bootstrap\dist\css\bootstrap.min.css'>
+    </script>
+    <script src="Persona.js"></script>
+    <script src="Enumerado.js"></script>
+    <script src="Empleado.js"></script>
+    <script src="App.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <br>
+        <h1 class="text-primary text-center bg-info">Segundo parcial</h1>
+        <br>
+        <form class="form-horizontal" id="form">
+            <div class="form-group">
+                <label for="id" class="control-label col-sm-2">Id:</label>
+                <div class="col-sm-2">
+                    <input class="form-control input-sm " name="id" id="id">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nombre" class="control-label col-sm-2">Nombre:</label>
+                <div class="col-sm-2">
+                    <input class="form-control input-sm" type="text" name="nombre" id="nombre">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="edad" class="control-label col-sm-2">Edad:</label>
+                <div class="col-sm-2">
+                    <input class="form-control input-sm" type="number" name="edad" id="edad">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tipoForm" class="control-label col-sm-2">Tipo:</label>
+                <div class="col-sm-2">
+                    <select class="form-control input-sm" name="tipoForm" id="tipoForm">
+                        <option value="1">supervisor</option>
+                        <option value="2">cajero</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="foto" class="control-label col-sm-2 ">Foto: </label>
+                <div class=" col-sm-3">
+                    <input name="foto" class="btn-file input-sm col-sm-12" id="inputFileToLoad" type="file" onchange="segundoParcial.encodeImageFileAsURL();"
+                    />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-2 col-sm-offset-2 ">
+                    <button id="btnAgregar" class="btn btn-info col-sm-12" value="Agregar">Agregar</button>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+        <h4 class="text-primary">Filtros:</h4>
+        <br>
+
+        <div class="col-sm-2">
+            <select class="form-control input-sm" name="Tipo" id="tipo" onchange="segundoParcial.filterBySelect()">
+                <option value="0">todos</option>
+                <option value="1">supervisor</option>
+                <option value="2">cajero</option>
+            </select>
+
+        </div>
+        <div>
+            <input type="checkbox" name="filterCheck" id="checkNombre" onchange="segundoParcial.ocultarColumnas(segundoParcial.Agregar)">
+            <label for="nombre">&nbsp;Nombre&nbsp;&nbsp;</label>
+            <input type="checkbox" name="filterCheck" id="checkEdad" onchange="segundoParcial.ocultarColumnas(segundoParcial.Agregar)">
+            <label for="checkEdad">&nbsp;Edad&nbsp;&nbsp;</label>
+            <input type="checkbox" name="filterCheck" id="checkTipo" onchange="segundoParcial.ocultarColumnas(segundoParcial.Agregar)">
+            <label for="checkTipo">&nbsp;Tipo&nbsp;&nbsp;</label>
+            <input type="checkbox" name="filterCheck" id="checkFoto" onchange="segundoParcial.ocultarColumnas(segundoParcial.Agregar)">
+            <label for="checkFoto">&nbsp;Foto</label>
+        </div>
+        <br>
+        <p> Promedio de edad: </p>
+
+        <div class="col-sm-2 ">
+            <input class="form-control input-sm text-center" name="promedio" id="promedio" onchange="segundoParcial.cargarPromedio()"
+                readonly>
+        </div>
+        <br>
+        <br>
+        <hr>
+        <br>
+
+        <h2 class="text-primary text-center">**** Lista de personas ****</h2>
+        <div class="table-responsive">
+            <table id="empleadosTable" class="table table-striped table-hover table-condensed">
+            </table>
+        </div>
+        <button class="btn btn-link col-xs-offset-11" onclick="segundoParcial.Limpiar()">Limpiar datos</button>
+
+    </div>
+    </div>
+
+</body>
+
+</html>
